@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block title %} 添加用户{% endblock %}
+
+
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/add_user.css') }}">
+{% endblock %}
+
+{% block pagename %}
+    添加用户
+{% endblock %}
+
+{% block admin_active %}
+    active
+{% endblock %}
+
+{% block main %}
+    <h3 class="page-title">添加用户</h3>
+    <form action="" method="post">
+        <div class="form-container">
+            <div class="form-group">
+                <input type="text" class="form-control"required="true" missingMessage="姓名必须填写" placeholder="用户名" name="username">
+            </div>
+            <div class="form-group">
+                <select class="form-control" name="is_admin" id="manufacturer">
+                     <option selected="selected">管理员权限</option>
+                     <option >是</option>
+                     <option >否</option>
+                </select>
+            </div>
+
+
+            <div class="form-group">
+                <input id="pwd1" type="password"required="true" missingMessage="姓名必须填写" class="form-control" placeholder="密码" name="password1">
+            </div>
+                        <div class="form-group">
+                <input id="pwd2" type="password"required="true" missingMessage="姓名必须填写" class="form-control" placeholder="确认密码" name="password2" onkeyup="validate()">
+                            <span id="tishi"></span>
+            </div>
+            <div class="form-group submit">
+                <button class="btn btn-primary btn-block">确认添加</button>
+            </div>
+        </div>
+    </form>
+{#    <script>#}
+{#          function validate() {#}
+{#              var pwd1 = document.getElementById("pwd1").value;#}
+{#              var pwd2 = document.getElementById("pwd2").value;#}
+{#              <!-- 对比两次输入的密码 -->#}
+{#              if(pwd1 == pwd2) {#}
+{#                  document.getElementById("tishi").innerHTML="<font color='green'>两次密码相同</font>";#}
+{#                  document.getElementById("submit").disabled = false;#}
+{#              }#}
+{#              else {#}
+{#                  document.getElementById("tishi").innerHTML="<font color='red'>两次密码不相同</font>";#}
+{#                document.getElementById("submit").disabled = true;#}
+{#              }#}
+{#          }#}
+{#     </script>#}
+{% endblock %}

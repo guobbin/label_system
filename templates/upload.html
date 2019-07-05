@@ -1,0 +1,32 @@
+
+{% extends 'base.html' %}
+
+{% block title %} 导入文件{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/upload.css') }}">
+    <link href="../static/css/fileinput.css" media="all" rel="stylesheet" type="text/css"/>
+    <script src="../static/js/fileinput.js" type="text/javascript"></script>
+{% endblock %}
+
+{% block pagename %}
+    导入
+{% endblock %}
+
+{% block admin_active %}
+    active
+{% endblock %}
+
+{% block main %}
+    <form action="" enctype='multipart/form-data'  method='POST'>
+{#           <input type="file" name="file">#}
+{#           <input type="submit" value="上传">#}
+       <input id="f_upload" type="file" name="file" multiple webkitdirectory class="file" data-show-preview="false"  />
+    </form>
+{% endblock %}
+
+ <form method="post" role="form" enctype="multipart/form-data">
+     <input name="file" id="file-input" type="file" class="file" multiple data-preview-file-type="text"
+            data-allowed-file-extensions='["zip", "rar"]' >
+
+ </form>

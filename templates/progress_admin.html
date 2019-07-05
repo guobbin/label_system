@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    标注情况
+{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static',filename='css/progress_admin.css') }}">
+{% endblock %}
+
+{% block pagename %}
+    标注情况
+{% endblock %}
+
+{% block admin_active %}
+    active
+{% endblock %}
+
+{% block main %}
+    <div class="list_container">
+        <h3 class="page-title"> 标注情况</h3>
+        <ul class="list-group">
+            <li class="list-group-item">
+                <div class="row ">
+                  <div class="col-md-4">用户</div>
+                  <div class="col-md-4">管理员权限</div>
+                  <div class="col-md-4">已标注(例)</div>
+                </div>
+            </li>
+            {% for i in result %}
+                  {% set user = i[0] %}
+
+                  <li class="list-group-item">
+{#                    <span class="badge">{{ user[1] }}</span>#}
+{#                    {{ user[0].username }}#}
+                    <div class="row ">
+                      <div class="col-md-4">{{ user.username }}</div>
+                      <div class="col-md-4">{% if user.is_admin %}是{% else %}否{% endif %}</div>
+                      <a href="{{ url_for('progress',user_id = user.id) }}"><div class="col-md-4">{{ i[1] }}</div></a>
+                    </div>
+                  </li>
+            {% endfor %}
+        </ul>
+
+        <nav aria-label="Page navigation"  class="pull-right">
+            <ul class="pagination">
+                {{ html|safe }}
+            </ul>
+        </nav>
+    </div>
+
+{% endblock %}
+

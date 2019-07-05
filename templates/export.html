@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+
+{% block title %} 导出{% endblock %}
+
+
+{% block head %}
+    <link href="../static/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/export.css') }}">
+
+{% endblock %}
+
+{% block pagename %}
+    导出
+{% endblock %}
+
+{% block admin_active %}
+    active
+{% endblock %}
+
+{% block main %}
+    <h3 class="page-title">导出</h3>
+    <form action="" method="post">
+        <div class="form-container" >
+{#            {% set attlist = ['ID','acc','pat','lab','reg','bor','blo','par','sin','des','con','scr'] %}#}
+            <div class="checkbox checkbox-inline" style="margin-top: 0; margin-left: 10px; width:30%">
+                <input type="checkbox" class="styled" id="inlineCheckbox1" name="a-ID" checked >
+                <label for="inlineCheckbox1"> ID</label>
+            </div>
+            <div class="checkbox checkbox-inline" style="width:30%">
+                <input type="checkbox" class="styled" id="inlineCheckbox2" name="b1-acc" checked>
+                <label for="inlineCheckbox2"> ACCESSID</label>
+            </div>
+            <div class="checkbox checkbox-inline" style="width:30%">
+                <input type="checkbox" class="styled" id="inlineCheckbox15" name="b2-fln" checked>
+                <label for="inlineCheckbox15"> 图片名 </label>
+            </div>
+            <div class="checkbox checkbox-inline" style="width:30%">
+                <input type="checkbox" class="styled" id="inlineCheckbox3" name="c-pat" checked>
+                <label for="inlineCheckbox3"> 有无病理报告</label>
+            </div>
+            <div class="checkbox checkbox-inline" style="width:30%">
+                <input type="checkbox" class="styled" id="inlineCheckbox4" name="d-lab" checked>
+                <label for="inlineCheckbox4"> 标注</label>
+            </div>
+            <div class="checkbox checkbox-inline" style="width:30%">
+                <input type="checkbox" class="styled" id="inlineCheckbox5" name="e-reg" >
+                <label for="inlineCheckbox5"> 形状</label>
+            </div>
+            <div class="checkbox checkbox-inline" style="width:30%">
+                <input type="checkbox" class="styled" id="inlineCheckbox6" name="f-bor" >
+                <label for="inlineCheckbox6"> 边界</label>
+            </div>
+            <div class="checkbox checkbox-inline" style="width:30%">
+                <input type="checkbox" class="styled" id="inlineCheckbox7" name="g-blo" >
+                <label for="inlineCheckbox7"> 血流</label>
+            </div>
+            <div class="checkbox checkbox-inline" style="width:30%">
+                <input type="checkbox" class="styled" id="inlineCheckbox8" name="h-par" >
+                <label for="inlineCheckbox8"> 部位</label>
+            </div>
+            <div class="checkbox checkbox-inline" style="width:30%">
+                <input type="checkbox" class="styled" id="inlineCheckbox9" name="i-sin" >
+                <label for="inlineCheckbox9"> 单张训练</label>
+            </div>
+            <div class="checkbox checkbox-inline" style="width:30%">
+                <input type="checkbox" class="styled" id="inlineCheckbox13" name="j-sla" >
+                <label for="inlineCheckbox13"> 单张分级</label>
+            </div>
+            <div class="checkbox checkbox-inline" style="width:30%">
+                <input type="checkbox" class="styled" id="inlineCheckbox10" name="k-des" >
+                <label for="inlineCheckbox10"> 回声描述</label>
+            </div>
+            <div class="checkbox checkbox-inline" style="width:30%">
+                <input type="checkbox" class="styled" id="inlineCheckbox11" name="l-con" >
+                <label for="inlineCheckbox11"> 结论</label>
+            </div>
+            <div class="checkbox checkbox-inline" style="width:30%">
+                <input type="checkbox" class="styled" id="inlineCheckbox12" name="scr" >
+                <label for="inlineCheckbox12"> 截框坐标</label>
+            </div>
+            <div class="checkbox checkbox-inline" style="width:30%">
+                <input type="checkbox" class="styled" id="inlineCheckbox14" name="labeled" >
+                <label for="inlineCheckbox14">已标注</label>
+            </div>
+
+
+
+
+            <div class="time-box">
+                <div class="input-group date form_datetime"  data-date-format="yyyy-mm-dd hh:ii" data-link-field="dtp_input1">
+                    <input placeholder="不早于：" class="form-control" size="16" type="text" value="" readonly name="time1">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                </div>
+                <input type="hidden" id="dtp_input1" value="" />
+                <div class="input-group date form_datetime"  data-date-format="yyyy-mm-dd hh:ii" data-link-field="dtp_input1">
+                    <input placeholder="不晚于：" class="form-control" size="16" type="text" value="" readonly name="time2">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                </div>
+                <input type="hidden" id="dtp_input1" value="" />
+            </div>
+            <div class="form-group" style="width:50%;margin: auto;margin-top: 50px;padding-bottom: 50px">
+                <button class="btn btn-primary btn-block">导出</button>
+            </div>
+        </div>
+    </form>
+<script type="text/javascript" src="../static/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+<script type="text/javascript" src="../static/js/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
+<script type="text/javascript">
+    $('.form_datetime').datetimepicker({
+        //language:  'fr',
+        weekStart: 1,
+        todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		forceParse: 0,
+        showMeridian: 1
+    });
+</script>
+<script>
+    $(document).ready(function(){
+    });
+</script>
+
+{% endblock %}

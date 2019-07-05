@@ -1,0 +1,106 @@
+.main{
+    padding-left: 15px;
+    margin-top: 50px;
+    overflow: hidden;
+}
+body{
+}
+
+.ultra-images{
+    width: 60%;
+    float:left;
+}
+.main form{
+    overflow: hidden;
+}
+.ultra_fixed{
+
+    width: 38%;
+    position: fixed;
+    top: 53px;
+    right: 15px;
+}
+
+
+.ultra-card{
+    width: 49%;
+    float: left;
+    margin: 4px;
+    overflow: hidden;
+    background: white;
+
+}
+
+
+.ultra-image {
+    padding: 10px;
+}
+
+.select-kind{
+    overflow: hidden;
+}
+
+select.form-control{
+    float: left;
+    width: 30%;
+    margin: 3px;
+}
+
+.form-group{
+    margin: 3px;
+}
+
+.form-container{
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.ultra_fixed button {
+    float: left;
+    width: 45%;
+    margin: 3px;
+}
+
+.ultra_fixed a.btn{
+    width:45%;
+    margin: 3px;
+}
+
+.button-card{
+    padding: 5px;
+    background: white;
+}
+
+.left.carousel-control {
+background-image:none;
+
+background-repeat: repeat-x;
+
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#80000000', endColorstr='#00000000', GradientType=1);
+
+}
+
+
+.right.carousel-control{
+    left: auto;
+    right: 0;
+    background-image:none;
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#80000000', GradientType=1);
+}
+
+.carousel-indicators li{
+    border-color:gray;
+}
+
+.carousel-indicators .active{
+    background: gray;
+}
+
+.hide-axis{
+    display: none;
+}
+
+.hide-axis1{
+    /*display: none;*/
+}

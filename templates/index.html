@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    首页
+{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static',filename='css/index.css') }}">
+{% endblock %}
+
+
+{% block progress_active %}
+    {% if is_progress %}
+        {% if not is_admin %}
+           class="active"
+        {% endif %}
+    {% endif %}
+{% endblock %}
+
+{% block index_active %}
+    {% if not is_progress %}
+       class="active"
+    {% endif%}
+{% endblock %}
+
+
+{% block pagename %}
+    管理员
+{% endblock %}
+
+
+{% if is_progress%}
+
+{% else %}
+
+{% endif %}
+
+
+{% block main %}
+    <div class="list_container">
+        <h3 class="page-title"> 检查者列表</h3>
+        <ul>
+            {% for access in accesses %}
+                <li>
+                    <div class="access-group">
+                        <h4 class="access-title"><a href="{{ url_for('detail',access_id = access.id) }}">{{ access.filename }}</a>
+                            {% if access.labeled%}
+                                <span class="label label-success">已标注</span>
+                                <span class="label-time"style="float: right;font-size: 14px;font-weight:400"> {{ access.label_time }} </span>
+                                <span class="labeler">标注: {{ access.labeler.username}}</span>
+                            {% else %}
+                                <span class="label label-default">未标注</span>
+                            {% endif %}
+
+                        </h4>
+
+                        <div class="access-info">
+
+
+                            <span class="uploader">导入: {{ access.uploader.username}}</span>
+
+                            <span class="upload-time"> {{ access.upload_time }}</span>
+
+
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+
+        </ul>
+
+        <nav aria-label="Page navigation"  class="pull-right">
+            <ul class="pagination">
+                {{ html|safe }}
+            </ul>
+        </nav>
+    </div>
+
+{% endblock %}
+

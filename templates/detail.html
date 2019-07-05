@@ -1,0 +1,258 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    标注
+{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="../static/css/cropper.css">
+    <script src = "../static/js/cropper.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/detail.css') }}">
+{% endblock %}
+
+{% block pagename %}
+    管理员
+{% endblock %}
+
+
+{% block main %}
+    <form action="" method="post" onsubmit="return verify()">
+        <div class="ultra-images">
+
+            {% for image in images %}
+
+            <div class="ultra-card">
+            <div class="box">
+                <div class="ultra-image">
+                        <img id = {{"image"+loop.index0|string}} src="{{ url_for('static',filename=image.file_path)}}" style="width: 100%; height: auto">
+                    </div>
+                <div class="form-container">
+                    <div class="select-kind">
+                        <select class="form-control" name={{ "border"+ image.filename}}>
+                             {% set attrlist2 = ['-边界-','清晰','不清晰']%}
+                             {% for attr in attrlist2%}
+                                 <option  {% if image.border == attr %}selected="selected" {% endif %}>{{ attr }}</option>
+                             {% endfor %}
+                        </select>
+                        <select id="111" class="form-control" name={{ "regulation" +image.filename}}>
+                             {% set attrlist1 = ['-形状-','规则','不规则']%}
+                             {% for attr in attrlist1%}
+                                 <option {% if image.regulation == attr %}selected="selected" {% endif %}>{{ attr }}</option>
+                             {% endfor %}
+                        </select>
+                        <select class="form-control" name={{ "bloodstream" + image.filename}}>
+                            {% set attrlist3 = ['-血流-','丰富','正常']%}
+                             {% for attr in attrlist3%}
+                                 <option  {% if image.bloodstream == attr %}selected="selected" {% endif %}>{{ attr }}</option>
+                             {% endfor %}
+                        </select>
+                        <select class="form-control" name={{ "part"+image.filename}}>
+                            {% set attrlist4 = ['-部位-','左叶','右叶','峡部','左叶及峡部','右叶及峡部']%}
+                             {% for attr in attrlist4%}
+                                 <option  {% if image.part == attr %}selected="selected" {% endif %}>{{ attr }}</option>
+                             {% endfor %}
+                        </select>
+                        <select class="form-control" name={{ "single_training"+image.filename}}>
+                            {% set attrlist5 = ['-单张训练-','是','否']%}
+                             {% for attr in attrlist5%}
+                                 <option  {% if image.single_training == attr %}selected="selected" {% endif %}>{{ attr }}</option>
+                             {% endfor %}
+                        </select>
+                        <select class="form-control" name={{ "single_label"+image.filename}}>
+                            {% set attrlist6 = ['-单张分级-','有癌','无癌','不确定']%}
+                             {% for attr in attrlist6%}
+                                 <option  {% if image.single_label == attr %}selected="selected" {% endif %}>{{ attr }}</option>
+                             {% endfor %}
+                        </select>
+{#                    class="btn btn-primary btn-block"#}
+
+                    </div>
+                    <div class="form-group">
+                        <input {% if image.desc==''%}placeholder="回声描述"{% else %}value={{image.desc }}{% endif %}
+                               type="text" class="form-control" type="text" name={{ "desc" + image.filename}}>
+                    </div>
+                    <div class="form-group">
+                        <input {% if image.conclusion==''%}placeholder="结论"{% else %} value={{image.conclusion }} {% endif %} type="text" class="form-control" name={{"conclusion"  +image.filename }}>
+                    </div>
+                    {% set list = ["x-axis","y-axis","width","height"] %}
+                    <input class="hide-axis" id="{{ "image"+loop.index0|string+"x" }}" name="{{"x"+image.filename}}"value={{ image.x }}>
+                    <input class="hide-axis"id="{{ "image"+loop.index0|string+"y" }}" name="{{"y"+image.filename}}"value={{ image.y }}>
+                    <input class="hide-axis"id="{{ "image"+loop.index0|string+"width" }}" name="{{"width"+image.filename}}" value={{ image.width }}>
+                    <input class="hide-axis"id="{{ "image"+loop.index0|string+"height" }}" name="{{"height"+image.filename}}"value={{ image.height }}>
+                    <input class="hide-axis"id="{{ "image"+loop.index0|string+'axis'}}" name="{{"axis"+image.filename}}"value="{{ image.x }},{{ image.y }},{{ image.width }},{{ image.height }}">
+
+
+                </div>
+            </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="ultra_fixed" style="background: white; height: 100%">
+            {% if access.pathologies %}
+            <div id="myCarousel" class="carousel slide" data-interval="false" style="width: 95%;overflow: hidden; height:400px;float: left;margin:0 10px 0px 10px">
+                <!-- 轮播（Carousel）指标 -->
+                <ol class="carousel-indicators">
+                    {% for pathology in access.pathologies %}
+                            {% if loop.index0==0 %}
+                            <li data-target="#myCarousel" data-slide-to="{{ loop.index0 }}" class="active"></li>
+                        {% else %}
+                            <li data-target="#myCarousel" data-slide-to="{{ loop.index0 }}"></li>
+                        {% endif %}
+                    {% endfor %}
+                </ol>
+                <!-- 轮播（Carousel）项目 -->
+                <div class="carousel-inner">
+                    {% for pathology in access.pathologies %}
+                        <div class="item  {% if loop.index0==0 %}active{% endif %}">
+                            <img onclick="javascript:window.open(this.src)" style="height:auto;width: 100%" src="{{ url_for('static',filename=pathology.file_path)}}" alt="Second slide">
+                        </div>
+                    {% endfor %}
+                </div>
+                <!-- 轮播（Carousel）导航 -->
+                <a class="left carousel-control" style="color:gray;" href="#myCarousel" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" style="color:gray;" href="#myCarousel" role="button" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+            {% endif %}
+            <textarea id="t1"style="width:70%;height: 40%;{% if not access.pathologies %}height: 100%{% endif %};border-style: hidden; padding: 4px; padding-top:20px; float: left" disabled>{{ ultra_report }}</textarea>
+
+
+            <div class="button-card" style="float: left; width: 25%;margin-top: 50px">
+                <a onclick="return CheckFirst()"  style="width: 100%;" href="{{ url_for('detail',access_id = last_access_id) }}" class="btn btn-default " role="button">上一例</a>
+                <a onclick="return CheckLast()" style="width: 100%"href="{{ url_for('detail',access_id = next_access_id) }}" class="btn btn-default " role="button">下一例</a>
+
+                <select style="width: 100%; text-align-last: center" class="form-control" name="result"id="result">
+                             {% set attrlist5 = ['-分级-','有癌','无癌','不确定']%}
+                             {% for attr in attrlist5%}
+                                 <option  {% if access.result == attr %}selected="selected"{% endif %}>{{ attr }}</option>
+                             {% endfor %}
+                 </select>
+                <button style="width: 100%" class="btn btn-primary btn-block">确认提交</button>
+
+            </div>
+
+
+        </div>
+        <input id="data" hidden value="{{ access.ultra_images }}">
+    </form>
+
+    <script>
+        /*$(function(){
+            $(".pause-slide").click(function(){
+			    $("#myCarousel").carousel('pause');
+		    });
+        });*/
+
+        $(document).ready(function(){
+            var obj = document.getElementById("t1");
+            obj.scrollTop = obj.scrollHeight;//滑到最底
+        })
+        function CheckLast(){
+            if({{ next_access_id}}=={{ access.id }}){
+                alert("已到最后一条数据！")
+                return false;
+            }
+        }
+        function CheckFirst() {
+            if({{ last_access_id}}=={{ access.id }}){
+                alert("已到第一条数据！");
+                return false;
+            }
+
+        }
+        function verify() {
+            var conclusion = $("#result").val();
+            if(conclusion=='-分级-'){
+                alert("请先标注分级再提交");
+                return false;
+            }else{
+                if (window.confirm("确认提交?")) {
+                    {#window.location = "";#}
+                    return true;
+                    } else {
+                    {#window.location = "" ;#}
+                    return false;
+                }
+            }
+        }
+
+    </script>
+
+    <script >
+        var list=$('.ultra-image img');
+        {#console.log(list);#}
+    for(var i of list){
+        $('#'+i.id).cropper({
+            viewMode: 1,   {#限制截取框在图片范围内#}
+            dragMode: 'crop',   {#截取框可任意重新选取#}
+            preview: ".small",
+            responsive: false,
+            restore: false,
+            guides:false,
+            background:false,
+            autoCrop: false,
+            //        autoCropArea:0.1,
+            movable:false,
+            rotatable:false,   {#不可旋转#}
+            scalable:false,
+            zoomable:false,
+            wheelZoomRatio:false,
+            zoomOnWheel:false,
+            //        cropBoxMovable:false,
+            //        cropBoxResizable:false,
+            ready: function () {
+                {#console.log("ready");#}
+                {#console.log(this);#}
+                $(this).cropper('crop');
+                $(this).cropper('setData',{ {# 设置坐标 #}
+                            x:parseInt($('#'+this.id+'x')[0].value),
+                            y:parseInt($('#'+this.id+'y')[0].value),
+                            width:parseInt($('#'+this.id+'width')[0].value),
+                            height:parseInt($('#'+this.id+'height')[0].value)
+                        });
+                {#$(this).cropper('setData',{width:500,height:500});#}
+                {#console.log($(this).cropper('getData', true));;#}
+
+            },
+            cropstart: function (e) {
+                {#console.log(e);#}
+                {#console.log("cropstart");#}
+            },
+            cropmove: function (e) {
+                {#console.log("cropmove");#}
+            },
+            cropend: function (e) {
+                {# 鼠标离开，暂存截框数据 #}
+                {#console.log("cropend");#}
+                {#console.log($(this).cropper('getData',true));;#}
+                var dic = $('#'+this.id).cropper('getData', true);
+                $('#'+this.id+'x')[0].value = dic.x;
+                $('#'+this.id+'y')[0].value = dic.y;    
+                $('#'+this.id+'width')[0].value = dic.width;
+                $('#'+this.id+'height')[0].value = dic.height;
+                $('#'+this.id+'axis')[0].value = dic.x.toString()+','+dic.y.toString()+','+dic.width.toString()+','+dic.height.toString();
+
+                console.log(this.id);
+
+            },
+            crop: function (e) {
+                {#console.log("crop");#}
+            },
+            zoom: function (e) {
+                {#console.log("zoom");#}
+            },
+        });
+        }
+
+
+</script>
+
+
+{% endblock %}
+

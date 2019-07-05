@@ -1,0 +1,23 @@
+.form-container{
+    width: 300px;
+    margin: 0 auto;
+
+}
+.page-title{
+    text-align: center;
+    padding-bottom: 30px;
+}
+.main{
+    background: #fff;
+    width: 730px;
+    margin: 0 auto;
+    margin-top: 70px
+;
+    overflow: hidden;
+    padding: 20px;
+}
+
+.form-group.submit{
+    padding-top: 20px;
+    padding-bottom: 20px;
+}

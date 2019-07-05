@@ -1,0 +1,26 @@
+.list_container{
+    width: 80%;
+    margin: 0 auto;
+}
+
+
+.page-title{
+    text-align: center;
+    padding-bottom: 40px;
+}
+
+
+
+.main{
+    background: #fff;
+    width: 730px;
+    margin: 0 auto;
+    margin-top: 70px;
+    overflow: hidden;
+     padding: 30px;
+}
+
+.col-md-4{
+    text-align: center;
+    font-size: 16px;
+}

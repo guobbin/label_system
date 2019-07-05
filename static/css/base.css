@@ -1,0 +1,13 @@
+
+body{
+    background: #f3f3f3;
+    /*margin-top: 70px;*/
+}
+
+body.main{
+    margin-top: 50px;
+}
+.logo{
+    width: auto;
+    height: 100%;
+}
