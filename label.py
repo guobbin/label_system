@@ -258,7 +258,7 @@ def logout():
 def detail(access_id):
     access = Access.query.filter(Access.id == access_id).first()    # 根据access_id查询access
     ultra_report = ''
-    ultra_report_path = os.path.dirname(__file__) + '/static/' + access.ultra_report[0].file_path
+    ultra_report_path = os.path.dirname(__file__) + './static/' + access.ultra_report[0].file_path
     for row in open(ultra_report_path).readlines():
         ultra_report += row.decode('gbk').encode('utf8')
     ultra_report = unicode(ultra_report, 'utf-8')
@@ -362,7 +362,7 @@ def my_context_processor():
     if user_id:
         user = User.query.filter(User.id == user_id).first()
         if user:
-                return {'user': user}
+            return {'user': user}
     return {}
 
 
