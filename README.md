@@ -57,5 +57,6 @@ python2 label.py
 
 
 ## The administrator has permission to import data
-> download the data sample [here](https://pan.baidu.com/s/1Wy6tUiHaBPqtbfOUb0s17g ), password:dv6o
+> download the data sample [here](https://pan.baidu.com/s/1Wy6tUiHaBPqtbfOUb0s17g ), password:dv6o. 
+> unzip and upload the folder 
 > the current version only supports Chrome browser
