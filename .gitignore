@@ -1,4 +1,5 @@
 migrations/
+static/uploads/
 !.gitkeep
 *.pyc
 venv/

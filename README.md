@@ -1,6 +1,8 @@
 # Label_system
 > Label system for ultrasound image of the thyroid nodule
 
+## Start the web server and login administrator account
+
 ### Downloading the code
 ```bash
 git clone https://github.com/guobbin/label_system.git
@@ -52,3 +54,7 @@ python2 label.py
 > open the browser and enter `http://127.0.0.1:5000`
 
 > the administrator's username and password: 'gbb' and '123'
+
+
+## The administrator has permission to import data
+> download the data sample [here](https://pan.baidu.com/s/1Wy6tUiHaBPqtbfOUb0s17g ), password:dv6o
