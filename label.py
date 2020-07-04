@@ -6,7 +6,7 @@ from exts import db
 from models import User, Access, UltraImage, UltraReport, Pathology
 from decorator import login_required
 from page_utils import Pagination
-import  os
+import os
 import pandas as pd
 from datetime import datetime
 import time
@@ -143,8 +143,8 @@ def login():
     if request.method == 'GET':
         return render_template('login.html')
     else:
-        username = request.form.get('username') #表单获取的用户名
-        password = request.form.get('password') #表单获取的用户密码
+        username = request.form.get('username') # 表单获取的用户名
+        password = requ:wqest.form.get('password') # 表单获取的用户密码
         user = User.query.filter(User.username == username, User.password == password).first() #根据用户名和密码查询用户
         if user: #用户存在则跳转登录
             session['user_id'] = user.id
@@ -172,23 +172,11 @@ def export():
         image_list = query.all()  # 查询结果
         if not image_list:  # 若结果为空则重新跳导入界面
             return render_template('export.html')
-        IDs = []
-        accs = []
-        flns = []
-        labels = []
-        pats = []
-        regs = []
-        bors = []
-        blos = []
-        pars = []
-        sins = []
-        slas = []
-        dess = []
-        cons = []
-        xs = []
-        ys = []
-        wids = []
-        heis = []
+        fields = ['IDs', 'accs', 'flns', 'labels', 'pats', 'regs', 'bors', 'blos',
+                  'pars', 'sins', 'slas', 'dess', 'cons', 'xs', 'ys', 'wids', 'heis']
+        for field in fields:
+            exec(field + '=[]')
+
         for image in image_list:
             IDs.append(image.access.PatientID)
             accs.append(image.access.ACCESSID)
@@ -258,7 +246,7 @@ def logout():
 def detail(access_id):
     access = Access.query.filter(Access.id == access_id).first()    # 根据access_id查询access
     ultra_report = ''
-    ultra_report_path = os.path.dirname(__file__) + './static/' + access.ultra_report[0].file_path
+    ultra_report_path = os.path.join(os.path.dirname(__file__), 'static',  access.ultra_report[0].file_path)
     for row in open(ultra_report_path).readlines():
         ultra_report += row.decode('gbk').encode('utf8')
     ultra_report = unicode(ultra_report, 'utf-8')
