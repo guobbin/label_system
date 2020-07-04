@@ -1,5 +1,6 @@
+!.gitkeep
 *.pyc
-venv
+venv/
 .idea/
 test.py
 .DS_Store
