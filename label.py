@@ -144,7 +144,7 @@ def login():
         return render_template('login.html')
     else:
         username = request.form.get('username') # 表单获取的用户名
-        password = requ:wqest.form.get('password') # 表单获取的用户密码
+        password = request.form.get('password') # 表单获取的用户密码
         user = User.query.filter(User.username == username, User.password == password).first() #根据用户名和密码查询用户
         if user: #用户存在则跳转登录
             session['user_id'] = user.id

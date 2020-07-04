@@ -26,12 +26,14 @@ class Access(db.Model):
     result = db.Column(db.String(50), default=u'-分级-')
     upload_time = db.Column(db.Date, default=datetime.now)
 
-    labeler_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    uploader_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    labeler_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='CASCADE'))
+    uploader_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='CASCADE'))
 
-    labeler = db.relationship('User', backref=db.backref('label_accesses'), foreign_keys=[labeler_id])
+    labeler = db.relationship('User', backref=db.backref('label_accesses'), foreign_keys=[labeler_id], cascade='all, delete',
+                                   passive_deletes=True)
 
-    uploader = db.relationship('User', backref=db.backref('upload_accesses'), foreign_keys=[uploader_id])
+    uploader = db.relationship('User', backref=db.backref('upload_accesses'), foreign_keys=[uploader_id], cascade='all, delete',
+                                   passive_deletes=True)
 
     # ultra_images = db.relationship('UltraImage', back_populates='access')
 
@@ -56,8 +58,9 @@ class UltraImage(db.Model):
     height = db.Column(db.String(50), default=u'461')
     create_time = db.Column(db.DateTime, default=datetime.now)
 
-    access_id = db.Column(db.Integer, db.ForeignKey('access.id'))
-    access = db.relationship('Access', backref=db.backref('ultra_images'))
+    access_id = db.Column(db.Integer, db.ForeignKey('access.id', ondelete='CASCADE'))
+    access = db.relationship('Access', backref=db.backref('ultra_images'), cascade='all, delete',
+                                   passive_deletes=True)
 
 
 class Pathology(db.Model):
@@ -66,8 +69,9 @@ class Pathology(db.Model):
     filename = db.Column(db.String(50), nullable=False)
     file_path = db.Column(db.Text, nullable=False)
 
-    access_id = db.Column(db.Integer, db.ForeignKey('access.id'))
-    access = db.relationship('Access', backref=db.backref('pathologies'))
+    access_id = db.Column(db.Integer, db.ForeignKey('access.id', ondelete='CASCADE'))
+    access = db.relationship('Access', backref=db.backref('pathologies'), cascade='all, delete',
+                                   passive_deletes=True)
 
 
 class UltraReport(db.Model):
@@ -76,5 +80,6 @@ class UltraReport(db.Model):
     filename = db.Column(db.String(50), nullable=False)
     file_path = db.Column(db.Text, nullable=False)
 
-    access_id = db.Column(db.Integer, db.ForeignKey('access.id'))
-    access = db.relationship('Access', backref=db.backref('ultra_report'), uselist=False)
+    access_id = db.Column(db.Integer, db.ForeignKey('access.id', ondelete='CASCADE'))
+    access = db.relationship('Access', backref=db.backref('ultra_report'), uselist=False, cascade='all, delete',
+                                   passive_deletes=True)

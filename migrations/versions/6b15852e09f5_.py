@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 2df53a39f516
+Revision ID: 6b15852e09f5
 Revises: 
-Create Date: 2019-03-30 15:45:50.583229
+Create Date: 2020-07-04 22:14:23.429227
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '2df53a39f516'
+revision = '6b15852e09f5'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -38,8 +38,8 @@ def upgrade():
     sa.Column('upload_time', sa.Date(), nullable=True),
     sa.Column('labeler_id', sa.Integer(), nullable=True),
     sa.Column('uploader_id', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['labeler_id'], ['user.id'], ),
-    sa.ForeignKeyConstraint(['uploader_id'], ['user.id'], ),
+    sa.ForeignKeyConstraint(['labeler_id'], ['user.id'], ondelete='CASCADE'),
+    sa.ForeignKeyConstraint(['uploader_id'], ['user.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('pathology',
@@ -47,7 +47,7 @@ def upgrade():
     sa.Column('filename', sa.String(length=50), nullable=False),
     sa.Column('file_path', sa.Text(), nullable=False),
     sa.Column('access_id', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['access_id'], ['access.id'], ),
+    sa.ForeignKeyConstraint(['access_id'], ['access.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('ultra_image',
@@ -68,7 +68,7 @@ def upgrade():
     sa.Column('height', sa.String(length=50), nullable=True),
     sa.Column('create_time', sa.DateTime(), nullable=True),
     sa.Column('access_id', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['access_id'], ['access.id'], ),
+    sa.ForeignKeyConstraint(['access_id'], ['access.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('ultra_report',
@@ -76,7 +76,7 @@ def upgrade():
     sa.Column('filename', sa.String(length=50), nullable=False),
     sa.Column('file_path', sa.Text(), nullable=False),
     sa.Column('access_id', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['access_id'], ['access.id'], ),
+    sa.ForeignKeyConstraint(['access_id'], ['access.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id')
     )
     # ### end Alembic commands ###
